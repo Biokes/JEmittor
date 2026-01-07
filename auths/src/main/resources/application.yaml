@@ -1,3 +1,16 @@
 spring:
   application:
     name: auths
+  datasource:
+    username:
+    password:
+    url:
+    driver-class-name: org.postgresql.Driver
+
+  config:
+    import: secrets.yaml
+  jpa:
+    hibernate:
+      ddl-auto: update
+server:
+  port: 8081
