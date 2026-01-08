@@ -1,21 +1,7 @@
 spring:
   application:
     name: auths
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: https://my-auth-server.com
-  datasource:
-    username:
-    password:
-    url:
-    driver-class-name: org.postgresql.Driver
+
 
   config:
     import: secrets.yaml
-  jpa:
-    hibernate:
-      ddl-auto: update
-server:
-  port: 8081
