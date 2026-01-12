@@ -12,10 +12,10 @@ public class JEmittorUserService implements UserService {
     private JEmittorUserRepository userRepository;
 
     @Override
-    public void createProfileIfNotExist(String email, String name, String googleId, String picture) {
+    public void updateUserProfile(String email, String name, String googleId, String picture) {
         userRepository.findUserByEmail(email.toLowerCase())
                         .ifPresentOrElse(
-                                user -> updateUserProfile(email, name, googleId, picture, user),
+                                user -> updateProfile(email, name, googleId, picture, user),
                                 ()-> createUserProfile(email, name, googleId, picture)
                         );
     }
@@ -31,7 +31,7 @@ public class JEmittorUserService implements UserService {
         userRepository.save(userCreated);
     }
 
-    private void updateUserProfile(String email, String name, String googleId, String picture, User updatedUser) {
+    private void updateProfile(String email, String name, String googleId, String picture, User updatedUser) {
         updatedUser.setName(name.toLowerCase());
         updatedUser.setGoogleId(googleId);
         updatedUser.setEmail(email.toLowerCase());

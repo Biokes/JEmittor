@@ -25,6 +25,6 @@ public class JEmittorSuccessHandler implements AuthenticationSuccessHandler {
         String name = oauth2User.getAttribute("name");
         String googleId = oauth2User.getAttribute("sub");
         String picture = oauth2User.getAttribute("picture");
-        userService.createProfileIfNotExist(email, name, googleId, picture);
+        userService.updateUserProfile(email, name, googleId, picture);
     }
 }
