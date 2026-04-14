@@ -1,9 +1,9 @@
 services:
   postgres:
     image: postgres:16
-    container-name: jemittor_keycloak_db
+    container_name: jemittor_keycloak_db
     restart: unless-stopped
-    evironment:
+    environment:
       POSTGRES_DB: ${KEYCLOAK_POSTGRES_DB}
       POSTGRES_USER: ${KEYCLOAK_POSTGRES_USER}
       POSTGRES_PASSWORD: ${KEYCLOAK_POSTGRES_PASSWORD}
@@ -15,20 +15,20 @@ services:
       test: ["CMD-SHELL", "pg_isready -U ${KEYCLOAK_POSTGRES_USER} -d ${KEYCLOAK_POSTGRES_DB}"]    
       interval: 10s
       timeout: 5s
-      retry: 5
+      retries: 5
       
   keycloak:
-    image: quay.io/keycloak/keycloak:24.0
-    container-name: jemittor_keycloak
+    image: quay.io/keycloak/keycloak:26.1.4
+    container_name: jemittor_keycloak
     restart: unless-stopped
-    command: restart-dev 
+    command: start-dev 
     environment:
       KC_DB: postgres
       KC_DB_URL: jdbc:postgresql://postgres:5432/${KEYCLOAK_POSTGRES_DB}
       KC_DB_USERNAME: ${KEYCLOAK_POSTGRES_USER}
       KC_DB_PASSWORD: ${KEYCLOAK_POSTGRES_PASSWORD}
-      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
-      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KEYCLOAK_ADMIN}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
       KC_HOSTNAME_STRICT: false 
       KC_HTTP_ENABLED: true
     ports:
