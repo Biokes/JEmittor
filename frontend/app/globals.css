@@ -1,0 +1,196 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: #ffffff;
+    --foreground: #171717;
+    
+    /* Material Design Colors */
+    --on-primary-fixed-variant: #003ea8;
+    --on-secondary-container: #576676;
+    --primary: #004ac6;
+    --tertiary-fixed-dim: #ffb596;
+    --on-tertiary-fixed: #360f00;
+    --inverse-on-surface: #f0f1f2;
+    --on-secondary: #ffffff;
+    --tertiary: #943700;
+    --surface-dim: #d9dadb;
+    --surface-container-lowest: #ffffff;
+    --on-secondary-fixed-variant: #3a4858;
+    --surface-variant: #e1e3e4;
+    --primary-fixed: #dbe1ff;
+    --on-surface-variant: #434655;
+    --outline: #737686;
+    --surface-tint: #0053db;
+    --primary-fixed-dim: #b4c5ff;
+    --on-primary-container: #eeefff;
+    --tertiary-fixed: #ffdbcd;
+    --surface: #f8f9fa;
+    --on-surface: #191c1d;
+    --on-tertiary-fixed-variant: #7d2d00;
+    --secondary: #516070;
+    --inverse-primary: #b4c5ff;
+    --on-background: #191c1d;
+    --on-tertiary: #ffffff;
+    --surface-container-high: #e7e8e9;
+    --surface-bright: #f8f9fa;
+    --outline-variant: #c3c6d7;
+    --secondary-fixed-dim: #b9c8db;
+    --secondary-container: #d5e4f8;
+    --on-primary: #ffffff;
+    --tertiary-container: #bc4800;
+    --on-error-container: #93000a;
+    --on-secondary-fixed: #0e1d2b;
+    --on-tertiary-container: #ffede6;
+    --surface-container-highest: #e1e3e4;
+    --surface-container-low: #f3f4f5;
+    --error-container: #ffdad6;
+    --inverse-surface: #2e3132;
+    --on-error: #ffffff;
+    --primary-container: #2563eb;
+    --error: #ba1a1a;
+    --secondary-fixed: #d5e4f8;
+    --on-primary-fixed: #00174b;
+    --surface-container: #edeeef;
+    --surface-dark: #191c1d;
+    --on-surface-dark: #e1e3e4;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: #0a0a0a;
+      --foreground: #ededed;
+    }
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  
+  /* Material Design Color Classes */
+  --color-on-primary-fixed-variant: var(--on-primary-fixed-variant);
+  --color-on-secondary-container: var(--on-secondary-container);
+  --color-primary: var(--primary);
+  --color-tertiary-fixed-dim: var(--tertiary-fixed-dim);
+  --color-on-tertiary-fixed: var(--on-tertiary-fixed);
+  --color-inverse-on-surface: var(--inverse-on-surface);
+  --color-on-secondary: var(--on-secondary);
+  --color-tertiary: var(--tertiary);
+  --color-surface-dim: var(--surface-dim);
+  --color-surface-container-lowest: var(--surface-container-lowest);
+  --color-on-secondary-fixed-variant: var(--on-secondary-fixed-variant);
+  --color-surface-variant: var(--surface-variant);
+  --color-primary-fixed: var(--primary-fixed);
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-outline: var(--outline);
+  --color-surface-tint: var(--surface-tint);
+  --color-primary-fixed-dim: var(--primary-fixed-dim);
+  --color-on-primary-container: var(--on-primary-container);
+  --color-tertiary-fixed: var(--tertiary-fixed);
+  --color-surface: var(--surface);
+  --color-on-surface: var(--on-surface);
+  --color-on-tertiary-fixed-variant: var(--on-tertiary-fixed-variant);
+  --color-secondary: var(--secondary);
+  --color-inverse-primary: var(--inverse-primary);
+  --color-on-background: var(--on-background);
+  --color-on-tertiary: var(--on-tertiary);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-surface-bright: var(--surface-bright);
+  --color-outline-variant: var(--outline-variant);
+  --color-secondary-fixed-dim: var(--secondary-fixed-dim);
+  --color-secondary-container: var(--secondary-container);
+  --color-on-primary: var(--on-primary);
+  --color-tertiary-container: var(--tertiary-container);
+  --color-on-error-container: var(--on-error-container);
+  --color-on-secondary-fixed: var(--on-secondary-fixed);
+  --color-on-tertiary-container: var(--on-tertiary-container);
+  --color-surface-container-highest: var(--surface-container-highest);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-error-container: var(--error-container);
+  --color-inverse-surface: var(--inverse-surface);
+  --color-on-error: var(--on-error);
+  --color-primary-container: var(--primary-container);
+  --color-error: var(--error);
+  --color-secondary-fixed: var(--secondary-fixed);
+  --color-on-primary-fixed: var(--on-primary-fixed);
+  --color-surface-container: var(--surface-container);
+  --color-surface-dark: var(--surface-dark);
+  --color-on-surface-dark: var(--on-surface-dark);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Card color switching animation */
+.feature-card {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 0%, var(--card-color) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+}
+
+.feature-card:hover::before {
+  opacity: 0.08;
+}
+
+.feature-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.feature-card .icon-wrapper {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.feature-card:hover .icon-wrapper {
+  transform: scale(1.1) rotate(5deg);
+  background-color: var(--card-color);
+}
+
+.feature-card:hover .icon-wrapper .material-symbols-outlined {
+  color: white;
+}
+
+/* Individual card colors */
+.card-blue {
+  --card-color: #2563eb;
+}
+
+.card-purple {
+  --card-color: #9333ea;
+}
+
+.card-green {
+  --card-color: #10b981;
+}
+
+.card-orange {
+  --card-color: #f59e0b;
+}
+
+.card-red {
+  --card-color: #ef4444;
+}
+
+.card-cyan {
+  --card-color: #06b6d4;
+}
