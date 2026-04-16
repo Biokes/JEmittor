@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Inter } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/app/components/theme-provider";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -32,9 +32,9 @@ export default function RootLayout({
       className={`${manrope.variable} ${inter.variable} scroll-smooth`}
     >
       <head>
-        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet"/>
       </head>
-      <body className="min-h-full">
+      <body className="min-h-screen antialiased">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
