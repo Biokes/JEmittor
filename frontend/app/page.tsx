@@ -43,8 +43,8 @@ export default function Home() {
                   <button className="relative inline-flex h-6 w-11 items-center rounded-full bg-surface-container-high dark:bg-primary/20 transition-colors focus:outline-none" id="theme-toggle" onClick={toggleTheme}>
                       <span className="sr-only">Toggle Dark Mode</span>
                       <span className="dark:translate-x-6 translate-x-1 inline-block h-4 w-4 transform rounded-full bg-white dark:bg-primary shadow-sm transition-transform duration-200 ease-in-out flex items-center justify-center">
-                          <span className="material-symbols-outlined text-[10px] dark:hidden text-primary">light_mode</span>
-                          <span className="material-symbols-outlined text-[10px] hidden dark:block text-white">dark_mode</span>
+                          <span className="material-symbols-outlined text-[10px] dark:hidden text-primary"></span>
+                          <span className="material-symbols-outlined text-[10px] hidden dark:block text-white"></span>
                       </span>
                   </button>
                   <a href="http://localhost:8001/realms/Jemittor/protocol/openid-connect/auth?client_id=jemittor-app&response_type=code&scope=openid&redirect_uri=http://localhost:3000/callback" className="text-slate-600 dark:text-slate-400 font-semibold text-sm hover:opacity-80 transition-opacity">Signin</a>
@@ -78,10 +78,10 @@ export default function Home() {
                           Define rules for crypto and FX. Get notified instantly when they hit. Architecture powered by Kafka for sub-millisecond precision.
                       </p>
                       <div className="flex flex-wrap gap-4 pt-4">
-                          <button className="px-8 py-4 bg-gradient-to-br from-primary to-primary-container text-white rounded-xl font-bold text-lg shadow-xl shadow-primary/20 hover:scale-105 active:scale-95 transition-all">
+                          <button className="text-on-surface dark:text-white px-8 cursor-pointer py-4 bg-primary/70 text-white rounded-xl font-bold text-lg shadow-xl shadow-primary/20 hover:scale-105 active:scale-95 transition-all">
                               Start for Free
                           </button>
-                          <button className="px-8 py-4 bg-surface-container-low dark:bg-surface-container-highest dark:text-white text-on-surface rounded-xl font-bold text-lg hover:bg-surface-container-high transition-colors">
+                          <button className="px-8 cursor-pointer py-4 bg-surface-container-low dark:bg-surface-container-highest dark:text-white text-on-surface rounded-xl font-bold text-lg hover:bg-surface-container-high transition-colors">
                               View Documentation
                           </button>
                       </div>
@@ -118,12 +118,12 @@ export default function Home() {
 
           <section className="py-12 bg-surface-container-low dark:bg-surface-dark border-y border-outline-variant/5">
               <div className="max-w-7xl mx-auto px-6">
-                  <p className="text-center text-[10px] uppercase tracking-[0.2em] text-outline dark:text-outline-variant mb-10 font-bold">Built with enterprise-grade tech</p>
+                  <p className="text-center text-[10px] uppercase tracking-[0.2em] text-outline dark:text-outline-variant  font-bold">Built with enterprise-grade tech</p>
                   <div className="flex flex-wrap justify-center gap-12 lg:gap-24 grayscale opacity-60 dark:opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-700">
                       <div className="flex items-center gap-2 font-bold text-xl"><span className="material-symbols-outlined text-primary">key</span> Keycloak</div>
                       <div className="flex items-center gap-2 font-bold text-xl"><span className="material-symbols-outlined text-primary">dynamic_form</span> Kafka</div>
                       <div className="flex items-center gap-2 font-bold text-xl"><span className="material-symbols-outlined text-primary">eco</span> Spring Boot</div>
-                      <div className="flex items-center gap-2 font-bold text-xl"><span className="material-symbols-outlined text-primary">javascript</span> React</div>
+                      <div className="flex items-center gap-2 font-bold text-xl"><span className="material-symbols-outlined text-primary">javascript</span> Next.js</div>
                   </div>
               </div>
           </section>
@@ -250,7 +250,7 @@ export default function Home() {
                       <div className="relative z-10">
                           <h2 className="font-headline text-3xl md:text-5xl font-bold mb-6">Ready to automate your logic?</h2>
                           <p className="text-primary-fixed-dim text-lg mb-10 max-w-xl mx-auto">Join 10,000+ developers and traders using Jemittor to power their market awareness.</p>
-                          <button className="bg-white text-primary px-10 py-4 rounded-xl font-bold text-lg hover:bg-surface-container-low transition-all active:scale-95 shadow-xl">Get Started Now</button>
+                          <button className="bg-white text-primary px-10 py-4 rounded-xl font-bold text-lg hover:bg-surface-container-low transition-all duration-400 active:scale-95 shadow-xl">Get Started Now</button>
                       </div>
                   </div>
               </div>
@@ -291,7 +291,7 @@ export default function Home() {
               </div>
           </div>
           <div className="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-outline-variant/10 text-center">
-              <p className="font-inter text-xs tracking-wide text-slate-500 dark:text-slate-400">© 2024 Jemittor Logic Architect. All rights reserved.</p>
+                  <p className="font-inter text-xs tracking-wide text-slate-500 dark:text-slate-400">© { new Date().getFullYear()} Jemittor.  All rights reserved.</p>
           </div>
       </footer>
     </div>
