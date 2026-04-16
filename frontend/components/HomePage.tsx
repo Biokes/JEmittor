@@ -113,8 +113,7 @@ export default function HomePage() {
             <a className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors" href="#analytics">Analytics</a>
           </div>
           <div className="flex items-center gap-6">
-            {/* Theme Toggle */}
-            <button 
+            <button
               className="relative inline-flex h-6 w-11 items-center rounded-full bg-surface-container-high dark:bg-primary/20 transition-colors focus:outline-none" 
               onClick={toggleTheme}
             >
@@ -137,7 +136,6 @@ export default function HomePage() {
       </nav>
 
       <main className="pt-24 pb-20">
-        {/* Welcome Section */}
         <section className="max-w-7xl mx-auto px-6 py-12">
           <div className="flex justify-between items-center mb-8">
             <div>
