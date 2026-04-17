@@ -3,10 +3,10 @@
   <component name="CompilerConfiguration">
     <annotationProcessing>
       <profile name="Annotation profile for auths" enabled="true">
-        <sourceOutputDir name="../auths/target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../auths/target/generated-test-sources/test-annotations" />
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <processorPath>
+        <processorPath useClasspath="false">
           <entry name="$USER_HOME$/.m2/repository/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
         </processorPath>
         <module name="auths" />

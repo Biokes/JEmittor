@@ -16,12 +16,61 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+
+  postgres_user:
+    image: postgres:16
+    container_name: jemittor_user_service_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: jemittor_user_service
+      POSTGRES_USER: ${UserService_DB_USER}
+      POSTGRES_PASSWORD: ${UserService_DB_PASSWORD}
+    volumes:
+      - postgres_user_data:/var/lib/postgresql/data
+    networks:
+      - keycloak_net
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${UserService_DB_USER} -d jemittor_user_service" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  kafka:
+    image: apache/kafka:latest
+    container_name: jemittor_kafka
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+    networks:
+      - keycloak_net
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: jemittor_kafka_ui
+    ports:
+      - "8002:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+    networks:
+      - keycloak_net
       
   keycloak:
-    image: quay.io/keycloak/keycloak:26.1.4
+    build:
+      context: .
+      dockerfile: Dockerfile.keycloak
+#    image: quay.io/keycloak/keycloak:26.1.4
     container_name: jemittor_keycloak
     restart: unless-stopped
-    command: start-dev 
+    command: start-dev
     environment:
       KC_DB: postgres
       KC_DB_URL: jdbc:postgresql://postgres:5432/${KEYCLOAK_POSTGRES_DB}
@@ -31,15 +80,45 @@ services:
       KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
       KC_HOSTNAME_STRICT: false 
       KC_HTTP_ENABLED: true
+      KC_SPI_EVENTS_LISTENER_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      KC_SPI_EVENTS_LISTENER_KAFKA_TOPIC_USER: keycloak-user-events
+      KC_SPI_EVENTS_LISTENER_KAFKA_ENABLE_USER_EVENTS: "true"
     ports:
       - "8001:8080"
     depends_on:
       postgres:
         condition: service_healthy
     networks:
-      - keycloak_net      
+      - keycloak_net
+
+  user-service:
+    build:
+      context: ./userService
+      dockerfile: Dockerfile
+    container_name: jemittor_user_service
+    restart: unless-stopped
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_user:5432/jemittor_user_service
+      SPRING_DATASOURCE_USERNAME: ${UserService_DB_USER}
+      SPRING_DATASOURCE_PASSWORD: ${UserService_DB_PASSWORD}
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI: http://keycloak:8080/realms/Jemittor
+    ports:
+      - "8081:8081"
+    depends_on:
+      postgres_user:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+      keycloak:
+        condition: service_started
+    networks:
+      - keycloak_net
+
 volumes:
   postgres_data:
+  postgres_user_data:
+
 
 networks:
   keycloak_net:
