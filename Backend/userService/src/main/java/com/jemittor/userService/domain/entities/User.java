@@ -1,13 +1,18 @@
-package main.java.com.jemittor.userService.domain.entities;
+package com.jemittor.userService.domain.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import lombok.Data;
+import com.jemittor.userService.domain.constants.AccountStatus;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
 @Entity
+@Table(name="profiles")
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class User{
     @Id
     private UUID id;
@@ -17,4 +22,8 @@ public class User{
     private String profilePictureUrl;
     private String displayName;
     private String notificationEmail;
+    @Enumerated(EnumType.STRING)
+    private AccountStatus accountStatus = AccountStatus.CREATED;
+    @Setter(AccessLevel.NONE)
+    private LocalDateTime dateJoined =  LocalDateTime.now();
 }
