@@ -1,13 +1,13 @@
-package com.jemittor.auths;
+package com.jemittor;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AuthsApplication {
+public class UserServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AuthsApplication.class, args);
+		SpringApplication.run(UserServiceApplication.class, args);
 	}
 
 }
