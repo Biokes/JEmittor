@@ -525,3 +525,4 @@ jemittor/
 | `http://localhost:3000/home` | `frontend/app/page.tsx` | OIDC redirect URI after login/register |
 | `keycloak-user-events` | `docker-compose.yml`, `KafkaService.java` | Kafka topic for Keycloak user events |
 
+
