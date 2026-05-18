@@ -91,6 +91,22 @@ services:
     networks:
       - keycloak_net
 
+  stellar-service:
+    build:
+      context: ./stellar-service
+      dockerfile: Dockerfile
+    container_name: jemittor_stellar_service
+    restart: unless-stopped
+    environment:
+      STELLAR_NETWORK: ${STELLAR_NETWORK:-testnet}
+      HORIZON_URL: ${HORIZON_URL:-https://horizon-testnet.stellar.org}
+      NETWORK_PASSPHRASE: ${NETWORK_PASSPHRASE:-Test SDF Network ; September 2015}
+      PORT: 8082
+    ports:
+      - "8082:8082"
+    networks:
+      - keycloak_net
+
   user-service:
     build:
       context: ./userService
